@@ -1,64 +1,73 @@
 #include <stdio.h>
-
-void LuckyNumber();
-void main() {
-	LuckyNumber();
-}
-void LuckyNumber() {
-	long n = 0;
-	int k = 0;
+char* LuckyNumber();
+void main() 
+{
+	int n;
+	int k;
 	printf("Enter your number (max 10 digits): ");
 	scanf_s("%i", &n);
+
 	printf("Enter your key (1-9): ");
 	scanf_s("%i", &k);
-	int num = 0;
-	int* ptrReversed = (int*)malloc(10 * sizeof(int));
-	
+;
+	printf("%s", LuckyNumber(n,k));
+}
+
+char* LuckyNumber(int n, int k) {
+	int arrnum = 0;
+	int reversed[10];
+
+	//	Entering number N into array
 	while (n != 0)
 	{
-		ptrReversed[num] = n % 10;
+		reversed[arrnum] = n % 10;
 		n = n / 10;
-		num++;
+		arrnum++;
 	}
-	int z = 0;
-	int* ptrA = (int*)malloc(10 * sizeof(int));
-	
-	for (z = 0; z < num; z++)
+
+	int startnum[10];
+
+	//	Reversing array
+	for (int i = 0; i < arrnum; i++)
 	{
-		ptrA[z] = ptrReversed[num - 1 - z];
+		startnum[i] = reversed[arrnum - 1 - i];
 	}
+
 	int i = -1;
-	int newnum = num;
+	int newnum = arrnum;
 	int j = 0;
-	int* ptrM = (int*)malloc(10 * sizeof(int));
+	int endnum[10];
 	int sum = 0;
+
+	//	Creating and entering value of new number depending on key into new array
 	do {
-		int f = k;
+		int skippednumberscounter = k;
 		do
 		{
 			i++;
-			if (i >= num) {
-				i -= num;
+			if (i >= arrnum) {
+				i -= arrnum;
 			}
-			if (ptrA[i] != 10) {
-				f--;
+			if (startnum[i] != 10) {
+				skippednumberscounter--;
 			}
-		} while (f != 0);
-		if (ptrA[i] != 10) {
-			ptrM[j] = ptrA[i];
-			ptrA[i] = 10;
+		} while (skippednumberscounter != 0);
+		if (startnum[i] != 10) {
+			endnum[j] = startnum[i];
+			startnum[i] = 10;
 			newnum--;
-			sum += ptrM[j];
+			sum += endnum[j];
+
 			j++;
 		}
 		else
 			i++;
 	} while (newnum != 0);
-	for (i = 0; i < num; i++) {
-		printf("%i", ptrM[i]);
+	for (i = 0; i < arrnum; i++) {
+		printf("%i", endnum[i]);
 	}
 	if (sum % 3 == 0)
-		printf("\nYES");
+		return "\nYes";
 	else
-		printf("\nNO");
+		return "\nNo";
 }
