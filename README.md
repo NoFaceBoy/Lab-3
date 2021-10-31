@@ -1,2 +1,1 @@
-# Lab3
-Repository with Lab 3 code and README file.
+The code from the third lab finds your lucky number. First of all, you need to enter N number (max 10 numbers), after that choose your K key (1-9). Code forms new number M from every K symbol. When the number is formed it should be multiple of three, only then it is considered lucky. Program prints down that number and tells you, YES or NO depending on if the number is lucky or not.
